@@ -9,7 +9,7 @@
     <p>This attack consists in that a miner or other party tries to “race” with a smart contract participant by inserting their own information into a list or mapping so the attacker may be lucky in getting their own information stored on the contract.</p>
     <p>update and finalize all conditions prior to payable functions</p>
 - Short Address Attack
-    <p>When The server taking in user data allows an Ethereum address that was less than 20 bytes: usually an Ethereum address looks like 0x1234567890123456789012345678901234567800. if you remove the trailing zerous it will still go through and actually take multiply amount wanted by 256 or 2^8</p>
+    <p>When The server taking in user data allows an Ethereum address that was less than 20 bytes: usually an Ethereum address looks like 0x1234567890123456789012345678901234567800. if you remove the trailing zerous it will still go through and actually take multiply amount wanted by 256 or 2^8 as long as the address being withdrawn from has that many tokens/coins</p>
     <p>Check for address inputs to be 20 bytes long</p>
     <p>Check for require(len(msg.data) == 68) or assert(len(msg.data) == 68) to be the right size 68 bytes</p>
 - `require()` vs `assert()`
