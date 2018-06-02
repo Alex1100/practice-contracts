@@ -3,6 +3,15 @@ pragma solidity^0.4.18;
 import './SofaContract.sol';
 import './SafeMath.sol';
 
+/*
+  assert() will burn the gas
+  while require() is a soft
+  error handling approach
+  that will return remaning gas to
+  function invoker if something is
+  wrong
+*/
+
 contract SofaStoreContract is SofaContract {
   using SafeMath for uint;
 
