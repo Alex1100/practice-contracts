@@ -18,6 +18,10 @@ contract SofaStoreContract is SofaContract {
     sofaToOwner[_sofaId] = _newOwner;
   }
 
+  function addSofaStoreSofas(string _name, uint _seats) {
+    addSofa(_name, _seats);
+  }
+
   function findAverageSeatsOnSofas() view public returns(uint) {
     uint sofaSum = 0;
     for(uint i = 0; i < sofas.length; i++) {
