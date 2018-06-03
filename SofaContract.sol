@@ -1,6 +1,8 @@
 pragma solidity 0.4.18;
 
-contract SofaContract {
+import './Ownable.sol';
+
+contract SofaContract is Ownable {
 
   struct Sofa {
     string name;

@@ -12,6 +12,22 @@ import './SafeMath.sol';
   wrong
 */
 
+/*
+  Mutatin value of state on the blockchain
+  costs gas or money
+
+  Reads that don't mutate state on the network
+  are completely free
+
+  To lower gas costs for mutating functions
+  use the correct uint type
+
+  for instance for dealig with a person or
+  properties age, use uint8 for only allocating
+  8 bits
+  max value for uint8 is 256 aka 11111111 == 256
+*/
+
 contract BankInterface {
   function getBalance() public view returns (uint);
   function deposit() public payable;
@@ -30,9 +46,11 @@ contract SofaStoreContract is SofaContract {
     _;
   }
 
+  BankInterface BankContract;
 
-  address externalAddress = 0xbe8162e3c0928479ce1614eddc33e377856b6014;
-  BankInterface BankContract = BankInterface(externalAddress);
+  function initBank(address_bankAddress) onlyOwner {
+    BankContract = BankInterface(_bankAddress);
+  }
 
   function transferSofa(uint _sofaId, address _newOwner)
     assureOwnerShip(_sofaId, _newOwner)
