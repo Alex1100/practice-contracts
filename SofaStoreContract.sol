@@ -1,4 +1,4 @@
-pragma solidity^0.4.18;
+pragma solidity 0.4.18;
 
 import './SofaContract.sol';
 import './SafeMath.sol';
@@ -12,6 +12,11 @@ import './SafeMath.sol';
   wrong
 */
 
+contract BankInterface {
+  function getBalance() public view returns (uint);
+  function deposit() public payable;
+}
+
 contract SofaStoreContract is SofaContract {
   using SafeMath for uint;
 
@@ -20,11 +25,27 @@ contract SofaStoreContract is SofaContract {
     _;
   }
 
+  modifier costs(uint _value) {
+    require (msg.value >= _value);
+    _;
+  }
+
+
+  address externalAddress = 0xbe8162e3c0928479ce1614eddc33e377856b6014;
+  BankInterface BankContract = BankInterface(externalAddress);
+
   function transferSofa(uint _sofaId, address _newOwner)
     assureOwnerShip(_sofaId, _newOwner)
+    costs(100)
+    payable
     public
   {
     sofaToOwner[_sofaId] = _newOwner;
+    BankContract.deposit.value(msg.value)();
+  }
+
+  function getBalance() public view returns (uint) {
+    return BankContract.getBalance();
   }
 
   function addSofaStoreSofas(string _name, uint _seats) public {
